@@ -13,4 +13,4 @@ export const BREADCRUMB_SKIP_SEGMENTS: string[] = [
 
 // Base segment that the home icon represents (e.g., "dashboard")
 // If the first segment matches this, it will be skipped
-export const BREADCRUMB_BASE_SEGMENT = "dashboard";
+export const BREADCRUMB_BASE_SEGMENT = "/dashboard";

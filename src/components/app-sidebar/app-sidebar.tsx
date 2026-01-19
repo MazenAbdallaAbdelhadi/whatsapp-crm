@@ -1,5 +1,5 @@
 "use client";
-import { HomeIcon, InboxIcon, BlocksIcon, SettingsIcon, ShieldCheck } from "lucide-react";
+import { HomeIcon, InboxIcon, BlocksIcon, SettingsIcon, ShieldCheck, GalleryVerticalIcon, AudioWaveformIcon, CommandIcon } from "lucide-react";
 
 import {
   Sidebar,
@@ -12,6 +12,25 @@ import { UserSidebarButton } from "@/features/auth";
 import { authClient } from "@/lib/auth/auth-client";
 
 import { NavMain } from "./nav-main";
+import { TeamSwitcher } from "./team-switcher";
+
+const teams = [
+  {
+    name: "Acme Inc.",
+    logo: GalleryVerticalIcon,
+    plan: "Enterprise",
+  },
+  {
+    name: "Monsters Inc.",
+    logo: AudioWaveformIcon,
+    plan: "Startup",
+  },
+  {
+    name: "Stark Industries",
+    logo: CommandIcon,
+    plan: "Free",
+  },
+]
 
 const mainNavData = [
   {
@@ -27,10 +46,10 @@ const mainNavData = [
   },
 ];
 
-const featuresData = [
+const settingsData = [
   {
-    title: "Integrations",
-    href: "/integrations",
+    title: "Templates",
+    href: "/templates",
     icon: BlocksIcon,
   },
   {
@@ -49,24 +68,26 @@ export const AppSidebar = ({
   const isAdmin = session?.user?.role?.toLowerCase().includes('admin') || false;
 
   // Add admin to features if user is admin
-  const features = isAdmin
+  const settings = isAdmin
     ? [
       {
         title: "Admin",
         href: "/admin/users",
         icon: ShieldCheck,
       },
-      ...featuresData,
+      ...settingsData,
     ]
-    : featuresData;
+    : settingsData;
 
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
-      <SidebarHeader></SidebarHeader>
+      <SidebarHeader>
+        <TeamSwitcher teams={teams} />
+      </SidebarHeader>
 
       <SidebarContent>
         <NavMain items={mainNavData} label="Main Menu" />
-        <NavMain items={features} label="Features" />
+        <NavMain items={settings} label="Settings" />
       </SidebarContent>
 
       <SidebarFooter>
