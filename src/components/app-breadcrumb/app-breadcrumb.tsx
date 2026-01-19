@@ -113,6 +113,7 @@ export function AppBreadcrumb({
             {isOnBasePage ? (
               <BreadcrumbPage className="flex items-center gap-1.5">
                 <Home className="h-4 w-4" />
+                <span className="font-medium text-sm">Dashboard</span>
               </BreadcrumbPage>
             ) : (
               <BreadcrumbLink asChild>
@@ -121,6 +122,7 @@ export function AppBreadcrumb({
                   className="flex items-center gap-1.5 transition-colors hover:text-foreground"
                 >
                   <Home className="h-4 w-4" />
+                  <span className="font-medium text-sm">Dashboard</span>
                 </Link>
               </BreadcrumbLink>
             )}
