@@ -1,5 +1,5 @@
 "use client";
-import { HomeIcon, InboxIcon, BlocksIcon, SettingsIcon, ShieldCheck, GalleryVerticalIcon, AudioWaveformIcon, CommandIcon } from "lucide-react";
+import { HomeIcon, InboxIcon, BlocksIcon, SettingsIcon, ShieldCheck, GalleryVerticalIcon, AudioWaveformIcon, CommandIcon, Users2Icon } from "lucide-react";
 
 import {
   Sidebar,
@@ -43,6 +43,11 @@ const mainNavData = [
     href: "/inbox",
     icon: InboxIcon,
     badge: 5,
+  },
+  {
+    title: "Leads",
+    href: "/leads",
+    icon: Users2Icon,
   },
 ];
 
