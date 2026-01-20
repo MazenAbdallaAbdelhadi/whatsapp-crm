@@ -69,13 +69,11 @@ export type UpdateOrganizationFormData = z.infer<typeof updateOrganizationSchema
  */
 export const inviteMemberSchema = z.object({
     email: z
-        .string()
         .email("Please enter a valid email address")
         .trim()
         .toLowerCase(),
     role: z.enum(["admin", "member"], {
-        required_error: "Please select a role",
-        invalid_type_error: "Please select a valid role",
+        error: "Please select a role"
     }),
 });
 
@@ -87,8 +85,7 @@ export type InviteMemberFormData = z.infer<typeof inviteMemberSchema>;
  */
 export const updateMemberRoleSchema = z.object({
     role: z.enum(["owner", "admin", "member"], {
-        required_error: "Please select a role",
-        invalid_type_error: "Please select a valid role",
+        error: "Please select a role",
     }),
 });
 
@@ -99,7 +96,7 @@ export type UpdateMemberRoleFormData = z.infer<typeof updateMemberRoleSchema>;
  */
 export const confirmActionSchema = z.object({
     confirmation: z.literal(true, {
-        errorMap: () => ({ message: "Please confirm this action" }),
+        error: "Please confirm this action"
     }),
 });
 

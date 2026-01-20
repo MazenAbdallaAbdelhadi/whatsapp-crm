@@ -41,7 +41,6 @@ export function CreateOrganizationDialog({
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [isPending, startTransition] = useTransition();
-    const [slugTouched, setSlugTouched] = useState(false);
     const [slugAvailable, setSlugAvailable] = useState<boolean | null>(null);
     const [checkingSlug, setCheckingSlug] = useState(false);
 
@@ -59,16 +58,11 @@ export function CreateOrganizationDialog({
 
     // Auto-generate slug from name when name changes and slug hasn't been manually edited
     useEffect(() => {
-        if (nameValue && !slugTouched) {
+        if (nameValue && !form.formState.dirtyFields.slug) {
             const generatedSlug = generateSlug(nameValue);
-            form.setValue("slug", generatedSlug, { shouldValidate: true });
+            form.setValue("slug", generatedSlug, { shouldValidate: true, shouldDirty: false });
         }
-    }, [nameValue, slugTouched, form]);
-
-    // Mark slug as touched when user manually edits it
-    const handleSlugChange = useCallback(() => {
-        setSlugTouched(true);
-    }, []);
+    }, [nameValue, form.formState.dirtyFields.slug, form]);
 
     // Debounced slug availability check
     const checkSlug = useDebouncedCallback(async (slug: string) => {
@@ -102,7 +96,6 @@ export function CreateOrganizationDialog({
     useEffect(() => {
         if (!open) {
             form.reset();
-            setSlugTouched(false);
             setSlugAvailable(null);
         }
     }, [open, form]);
@@ -160,7 +153,6 @@ export function CreateOrganizationDialog({
                             label="URL Slug"
                             placeholder="my-organization"
                             description={getSlugDescription()}
-                            onChangeCapture={handleSlugChange}
                         />
                         <FormInput
                             control={form.control}

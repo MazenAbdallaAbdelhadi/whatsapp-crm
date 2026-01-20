@@ -44,7 +44,7 @@ export function LeadsTableToolbar<TData>({
                         <Button variant="outline" size="sm" className="h-9 border-dashed">
                             <Plus className="mr-2 h-4 w-4" />
                             Status
-                            {table.getColumn("status")?.getFilterValue() && (
+                            {!!table.getColumn("status")?.getFilterValue() && (
                                 <>
                                     <Separator orientation="vertical" className="mx-2 h-4" />
                                     <Badge variant="secondary" className="rounded-sm px-1 font-normal lg:hidden">
